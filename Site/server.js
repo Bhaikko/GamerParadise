@@ -1,11 +1,34 @@
 const express = require("express");
+const session = require("express-session");
+
+const router = require("./routes/api/index").route
+const userRouter = require("./routes/api/user").route;
+const vendorRouter = require("./routes/api/vendor").route;
+const { passport } = require("./passport");
 
 const { database } = require("./database/database");
 
 const server = express();
 
-const PORT = 4000;
+server.use(express.json());
+server.use(express.urlencoded({ extended: true}));
 
+const sessionMiddleware = session({
+    secret: "FFFFF",
+    resave: false,
+    saveUninitialized: true 
+});
+
+server.use(sessionMiddleware);
+server.use(passport.initialize());
+server.use(passport.session());
+
+server.use(express.static("./public"));
+server.use("/", router);
+server.use("/user", userRouter);
+server.use("/vendor", vendorRouter);
+
+const PORT = 4000;
 database.sync()
     .then(() => {
         console.log("SQL Database Synced");

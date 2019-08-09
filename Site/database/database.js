@@ -110,10 +110,6 @@ const Vendors = database.define("vendors", {
         type: Sequelize.STRING,
         allowNull: false 
     },
-    companyPhone: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
     companyMobile: {
         type: Sequelize.STRING,
         allowNull: false
@@ -144,5 +140,13 @@ Genres.belongsToMany(Products, { through: "ProductGenres"});
 Reviews.belongsTo(Products);
 
 module.exports = {
-    database
+    database,
+    Users,
+    Vendors,
+    Orders,
+    CartItems,
+    Platforms,
+    Genres,
+    Reviews,
+    Products
 }
