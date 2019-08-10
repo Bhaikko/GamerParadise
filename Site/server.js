@@ -24,6 +24,10 @@ server.use(passport.initialize());
 server.use(passport.session());
 
 server.use(express.static("./public"));
+server.use("/user", express.static("./private/user"));
+server.use("/vendor", express.static("./private/vendor"));
+
+
 server.use("/", router);
 server.use("/user", userRouter);
 server.use("/vendor", vendorRouter);

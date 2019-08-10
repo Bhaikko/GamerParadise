@@ -8,20 +8,20 @@ userSignupButton.addEventListener("click", () => {
     userForm.classList.remove("hide");
     vendorForm.classList.add("hide");
 
-    userLoginButton.classList.add("btn-primary");
-    userLoginButton.classList.remove("btn-secondary");
+    userSignupButton.classList.add("btn-primary");
+    userSignupButton.classList.remove("btn-secondary");
 
-    vendorLoginButton.classList.add("btn-secondary");
-    vendorLoginButton.classList.remove("btn-primary");
+    vendorSignupButton.classList.add("btn-secondary");
+    vendorSignupButton.classList.remove("btn-primary");
 });
 
 vendorSignupButton.addEventListener("click", () => {
     vendorForm.classList.remove("hide");
     userForm.classList.add("hide");
 
-    vendorLoginButton.classList.add("btn-primary");
-    vendorLoginButton.classList.remove("btn-secondary");
+    vendorSignupButton.classList.add("btn-primary");
+    vendorSignupButton.classList.remove("btn-secondary");
 
-    userLoginButton.classList.add("btn-secondary");
-    userLoginButton.classList.remove("btn-primary");
+    userSignupButton.classList.add("btn-secondary");
+    userSignupButton.classList.remove("btn-primary");
 });

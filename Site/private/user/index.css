@@ -1,0 +1,20 @@
+.searchBar {
+    margin-left: 10%;
+}
+
+.searchBar>input {
+    width: 500px !important;
+}
+
+.navButtons {
+    position: absolute;
+    right: 10px;
+}
+
+.filterMenu {
+    display: inline-block;
+    position: absolute;
+    padding: 10px;
+    height: 100%;
+    width: 300px;
+}
