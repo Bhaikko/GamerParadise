@@ -1,0 +1,20 @@
+.signout {
+    position: absolute;
+    right: 10px;
+}
+
+
+.dashboardColumn {
+    padding: 10px;
+    overflow-y: auto;
+    height: 700px;
+    overflow-x: hidden;
+}
+
+.orderImage {
+    width: 100px;
+}
+
+.newitemBox {
+    width: 500px;
+}
