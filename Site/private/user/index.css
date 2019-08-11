@@ -31,7 +31,8 @@ body {
     margin-top: 25px;
     margin-left: 300px;
     width: 950px;
-    max-height: 600px;
+    height: 800px;
+    /* max-height: 700px; */
     overflow-y: auto;
 }
 
@@ -42,4 +43,39 @@ body {
 
 .card-img-top {
     height: 150px;
+}
+
+#cart {
+    position: absolute;
+    right: 0px;
+    top: 70px;
+}
+
+#cartButton {
+    width: 50px;
+}
+
+#cartButton:hover {
+    right: 0px;
+}
+
+#cartButton:hover+#cartContent {
+    right: 0px;
+}
+
+#cartContent:hover {
+    right: 0px;
+}
+
+#cartContent {
+    border-radius: 2%;
+    position: absolute;
+    height: 500px;
+    width: 300px;
+    right: -300px;
+    background-color: #005EA6;
+    transition: 0.5s;
+    padding: 30px;
+    max-height: 500px;
+    overflow-y: auto;
 }
