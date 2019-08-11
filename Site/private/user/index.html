@@ -11,12 +11,13 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <img src="./logo.png" width="50">
+        <img src="./Images/logo.png" width="50">
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -40,8 +41,229 @@
             </ul>
         </div>
     </nav>
-    <div class="filterMenu bg-dark text-light">
-asdasdas
+    <form class="filterMenu bg-dark text-light">
+        <div class="btn-group dropright">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Category
+            </button>
+            <div class="dropdown-menu">
+                <button type="button" class="dropdown-item" id="gamesButton">Games</button>
+                <button type="button" class="dropdown-item" id="componentsButton">PC Components</button>
+                <button type="button" class="dropdown-item" id="accessoriesButton">Accessories</button>
+                <button type="button" class="dropdown-item" id="consolesButton">Consoles</button>
+            </div>
+        </div>
+        <br><br>
+
+        <div id="genres" class="filter" hidden>
+            <h3 class="text-light">GENRES</h3>
+            <div>
+                <input type="checkbox" id="genre1" name="genre1" value="platform">
+                <label for="genre1">Platformer</label>
+            </div>
+            <div>
+                <input type="checkbox" id="genre2" name="genre2" value="shooter">
+                <label for="genre2">Shooter</label>
+            </div>
+            <div>
+                <input type="checkbox" id="genre3" name="genre3" value="stealth">
+                <label for="genre3">Steath</label>
+            </div>
+            <div>
+                <input type="checkbox" id="genre4" name="genre4" value="survival">
+                <label for="genre4">Survival</label>
+            </div>
+            <div>
+                <input type="checkbox" id="genre5" name="genre5" value="battleRoyale">
+                <label for="genre5">Battle Royale</label>
+            </div>
+            <div>
+                <input type="checkbox" id="genre6" name="genre6" value="horror">
+                <label for="genre6">Horror</label>
+            </div>
+            <div>
+                <input type="checkbox" id="genre7" name="genre7" value="racing">
+                <label for="genre7">Racing</label>
+            </div>
+            <div>
+                <input type="checkbox" id="genre8" name="genre8" value="openworld">
+                <label for="genre8">Open World</label>
+            </div>
+            <div>
+                <input type="checkbox" id="genre9" name="genre9" value="sports">
+                <label for="genre9">Sports</label>
+            </div>
+            <div>
+                <input type="checkbox" id="genre10" name="genre10" value="fighting">
+                <label for="genre10">Fighting</label>
+            </div>
+        </div>
+
+        <div id="components" class="filter" hidden>
+            <h3 class="text-light">TYPE</h3>
+            <div>
+                <input type="radio" id="component1" name="component" value="gpu">
+                <label for="component1">GPU</label>
+            </div>
+            <div>
+                <input type="radio" id="component2" name="component" value="cpu">
+                <label for="component2">CPU</label>
+            </div>
+            <div>
+                <input type="radio" id="component3" name="component" value="motherboard">
+                <label for="component3">Motherboard</label>
+            </div>
+            <div>
+                <input type="radio" id="component4" name="component" value="memory">
+                <label for="component4">Memory</label>
+            </div>
+            <div>
+                <input type="radio" id="component5" name="component" value="storage">
+                <label for="component5">Storage</label>
+            </div>
+            <div>
+                <input type="radio" id="component6" name="component" value="psu">
+                <label for="component6">Power Supply Unit</label>
+            </div>
+            <div>
+                <input type="radio" id="component7" name="component" value="cabinet">
+                <label for="component7">Cabinet</label>
+            </div>
+        </div>
+
+        <div id="accessories" class="filter" hidden>
+            <h3 class="text-light">TYPE</h3>
+            <div>
+                <input type="radio" id="accessory1" name="accessory" value="keyboard">
+                <label for="accessory1">Keyboard</label>
+            </div>
+            <div>
+                <input type="radio" id="accessory2" name="accessory" value="mouse">
+                <label for="accessory2">Mouse</label>
+            </div>
+            <div>
+                <input type="radio" id="accessory3" name="accessory" value="mousepad">
+                <label for="accessory3">Mousepad</label>
+            </div>
+            <div>
+                <input type="radio" id="accessory4" name="accessory" value="controller">
+                <label for="accessory4">Controller</label>
+            </div>
+            <div>
+                <input type="radio" id="accessory5" name="accessory" value="headset">
+                <label for="accessory5">Headset</label>
+            </div>
+        </div>
+
+        <div id="companies" class="filter" hidden>
+                <h3 class="text-light">COMPANIES</h3>
+            <div>
+                <input type="radio" id="company1" name="company" value="sony">
+                <label for="company1">Sony</label>
+            </div>
+            <div>
+                <input type="radio" id="company2" name="company" value="microsoft">
+                <label for="company2">Microsoft</label>
+            </div>
+            <div>
+                <input type="radio" id="company3" name="company" value="nintendo">
+                <label for="company3">Nintendo</label>
+            </div>
+        </div>
+
+        <br>
+        <div id="range">
+            <h3 class="text-light">PRICE RANGE</h3>
+            <div>
+                <label for="company3">Min Price: ₹</label>
+                <input type="number" id="min" name="minPrice">
+            </div>
+            <div>
+                <label for="company3">Max Price: ₹</label>
+                <input type="number" id="max" name="maxPrice">
+            </div>
+        </div>
+        <br>
+        <button type="button" class="btn btn-light " id="filterButton">Filter Searches</button>
+    </form>
+
+    <div class="container" id="content">
+        <!-- Default Page -->
+        <!-- <div class="row">
+            <div class="col">
+                <div class="card pd-2" style="width: 18rem;">
+                    <img src="Images/PS4.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Consoles</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2"></div>
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <img src="Images/Game.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Games</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <img src="Images/Accessories.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Accessories</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2"></div>
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <img src="Images/Component.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Accessories</h5>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    
+        <div class="row ml-4 mt-5">
+            <div class="col mb-3">
+                <div class="card" style="width: 18rem;">
+                    <img src="Images/Game.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <a href="/user/games/1"><h5 class="card-title">Dying Light</h5></a>
+                        <p class="card-text">₹ 5000</p>
+                        <button type="button" class="btn btn-danger">Add To Cart</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col mb-3">
+                <div class="card" style="width: 18rem;">
+                    <img src="Images/Game.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <a href="/user/games/1"><h5 class="card-title">Dying Light</h5></a>
+                        <p class="card-text">₹ 5000</p>
+                        <button type="button" class="btn btn-danger">Add To Cart</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col mb-3">
+                <div class="card" style="width: 18rem;">
+                    <img src="Images/Game.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <a href="/user/games/1"><h5 class="card-title">Dying Light</h5></a>
+                        <p class="card-text">₹ 5000</p>
+                        <button type="button" class="btn btn-danger">Add To Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
+
+    <script src="index.js"></script>
 </body>
 </html>

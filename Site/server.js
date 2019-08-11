@@ -36,6 +36,6 @@ const PORT = 4000;
 database.sync()
     .then(() => {
         console.log("SQL Database Synced");
-        server.listen(PORT, () => console.log("Server Up And Running On 127.0.01:" + PORT));
+        server.listen(PORT, () => console.log("Server Up And Running On 127.0.0.1:" + PORT));
     });
 
