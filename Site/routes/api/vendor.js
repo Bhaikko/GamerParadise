@@ -12,7 +12,6 @@ const checkVendorLogin = (req, res, next) => {
     next();
 }
 
-
 route.get("/", checkVendorLogin, (req, res, next) => {
     next();
 });
