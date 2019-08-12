@@ -1,24 +1,26 @@
-const route = require("express").Router();
+const express = require("express");
+const route = express.Router();
 
 const { passport } = require("./../../passport");
 
-const checkUserLogin = () => {
+const checkUserLogin = (req, res, next) => {
     if(!req.user)
     {
-        res.redirect("/user/login.html");
+        res.redirect("/login.html");
         return;
     }
     next();
-
-
 }
-route.get("/", checkUserLogin, (req, res) => {
-    // console.log()
+
+route.get("/", checkUserLogin, (req, res, next) => {
+    next();
 });
 
+route.use("/", express.static(__dirname + "/../../private/user"));
+
 route.post("/login", passport.authenticate("user", {
-    successRedirect: "/user/home",
-    failureRedirect: "/user"
+    successRedirect: "/user",
+    failureRedirect: "/login.html"
 }));
 
 

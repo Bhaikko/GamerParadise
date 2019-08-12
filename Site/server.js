@@ -1,7 +1,6 @@
 const express = require("express");
 const session = require("express-session");
 
-const router = require("./routes/api/index").route
 const userRouter = require("./routes/api/user").route;
 const vendorRouter = require("./routes/api/vendor").route;
 const { passport } = require("./passport");
@@ -23,14 +22,19 @@ server.use(sessionMiddleware);
 server.use(passport.initialize());
 server.use(passport.session());
 
+server.use(express.static("./uploads"));
 server.use(express.static("./public"));
-server.use("/user", express.static("./private/user"));
-server.use("/vendor", express.static("./private/vendor"));
 
-
-server.use("/", router);
 server.use("/user", userRouter);
 server.use("/vendor", vendorRouter);
+
+
+server.get("/logout", (req, res) => {
+    req.logOut();
+    res.redirect("/");
+});
+
+
 
 const PORT = 4000;
 database.sync()
