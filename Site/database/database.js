@@ -56,14 +56,12 @@ const Orders = database.define("orders", {
     }
 });
 
-const Platforms = database.define("platforms", {
-    name: {
-        type: Sequelize.STRING 
-    }
-});
-
 const Products = database.define("products", {
     name: {
+        type: Sequelize.STRING,
+        allowNull: false 
+    },
+    price: {
         type: Sequelize.STRING,
         allowNull: false 
     },
@@ -73,13 +71,10 @@ const Products = database.define("products", {
     productSubtype:{
         type: Sequelize.STRING,
     },
-    genre: {
+    image: {
         type: Sequelize.STRING,
-    },
-    platform: {
-        type: Sequelize.STRING 
+        allowNull: false 
     }
-
 });
 
 const Genres = database.define("genres", {
@@ -125,6 +120,8 @@ const Vendors = database.define("vendors", {
     }
 });
 
+const ProductGenres = database.define("productgenres");
+
 CartItems.belongsTo(Users);
 CartItems.belongsTo(Products);
 
@@ -132,10 +129,11 @@ Orders.belongsTo(Users);
 Orders.belongsTo(Products);
 Orders.belongsTo(Vendors);
 
-Products.belongsToMany(Platforms, { through: "ProductPlatform"});
-Platforms.belongsToMany(Products, { through: "ProductPlatform"});
-Products.belongsToMany(Genres, { through: "ProductGenres"});
-Genres.belongsToMany(Products, { through: "ProductGenres"});
+Products.belongsTo(Vendors);
+Vendors.hasMany(Products);
+
+Products.belongsToMany(Genres, { through: ProductGenres});
+Genres.belongsToMany(Products, { through: ProductGenres});
 
 Reviews.belongsTo(Products);
 
@@ -145,8 +143,8 @@ module.exports = {
     Vendors,
     Orders,
     CartItems,
-    Platforms,
     Genres,
     Reviews,
-    Products
+    Products,
+    ProductGenres
 }

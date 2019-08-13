@@ -1,5 +1,6 @@
 const express = require("express");
 const session = require("express-session");
+const MongoStore = require("connect-mongo")(session);
 
 const userRouter = require("./routes/api/user").route;
 const vendorRouter = require("./routes/api/vendor").route;
@@ -15,7 +16,10 @@ server.use(express.urlencoded({ extended: true}));
 const sessionMiddleware = session({
     secret: "FFFFF",
     resave: false,
-    saveUninitialized: true 
+    saveUninitialized: true,
+    store: new MongoStore({
+        url: "mongodb://127.0.0.1:5000/sessions"
+    })
 });
 
 server.use(sessionMiddleware);

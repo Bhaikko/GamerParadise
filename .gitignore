@@ -2,3 +2,6 @@
 Design/*
 
 Site/node_modules/*
+
+Site/uploads/*
+Site/database/sessions
