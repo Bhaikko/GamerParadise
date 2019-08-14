@@ -18,3 +18,15 @@
 .newitemBox {
     width: 500px;
 }
+
+.navButtons {
+    width: 100%;
+}
+
+#navForm {
+    margin-left: 40%;
+}
+
+#navForm li {
+    display: inline-block;
+}

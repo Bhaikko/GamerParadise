@@ -8,7 +8,7 @@ const { passport } = require("./../../passport");
 const vendorDatabaseHandler = require("./../../database/vendorDatabaseHandler");
 
 const checkVendorLogin = (req, res, next) => {
-    if(!req.user)
+    if(!req.user || !req.user.get().companyName)
     {
         res.redirect("/login.html");
         return;
@@ -16,24 +16,11 @@ const checkVendorLogin = (req, res, next) => {
     next();
 }
 
-route.get("/", checkVendorLogin, (req, res, next) => {
-    next();
-});
-
-route.use("/", express.static(__dirname + "/../../private/vendor"));
-
 route.post("/login", passport.authenticate("vendor", {
     successRedirect: "/vendor",
     failureRedirect: "/login.html"
 }));
 
-
-route.get("/", (req, res) => {
-    if(req.message)
-        res.send(req.message);
-    else
-      res.sendStatus(400);
-});
 
 route.post("/addProduct", upload.single("itemPhoto"), (req, res, next) => {
 
@@ -41,7 +28,21 @@ route.post("/addProduct", upload.single("itemPhoto"), (req, res, next) => {
     res.redirect("/vendor");
 });
 
+route.get("/products", (req, res, next) => {
+    vendorDatabaseHandler.getProducts(req.user.get().id)
+     .then(products => res.send(products));
+});
 
+route.delete("/deleteProduct", (req, res, next) => {
+    vendorDatabaseHandler.deleteProduct(req.user.get().id, req.body.id);
+    res.sendStatus(200);
+})
+
+route.use(checkVendorLogin, (req, res, next) => {
+    next();
+});
+
+route.use(express.static(__dirname + "/../../private/vendor"));
 
 module.exports = {
     route 

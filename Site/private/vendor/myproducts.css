@@ -1,0 +1,25 @@
+.navButtons {
+    width: 100%;
+}
+
+#navForm {
+    margin-left: 40%;
+}
+
+#navForm li {
+    display: inline-block;
+}
+
+
+form>input {
+    width: 150px !important;
+}
+
+.product {
+    border-radius: 5%;
+}
+
+.productBox {
+    height: 300px; 
+    overflow-y: auto;
+}

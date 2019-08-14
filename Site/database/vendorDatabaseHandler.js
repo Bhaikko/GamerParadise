@@ -47,6 +47,27 @@ const addProduct = (name, price, productType, productSubtype, image, genres, ven
      });
 }
 
+const getProducts = (vendorId) => {
+    return Products.findAll({
+        attributes: ["id", "image", "name", "price", "productSubtype", "productType"],
+        where: {
+            vendorId
+        }
+    })
+     .then(products => products);
+}
+
+const deleteProduct = (vendorId, productId) => {
+    return Products.destroy({
+        where: {
+            id: productId,
+            vendorId
+        }
+    })
+}
+
 module.exports = {
-    addProduct
+    addProduct,
+    getProducts,
+    deleteProduct
 }

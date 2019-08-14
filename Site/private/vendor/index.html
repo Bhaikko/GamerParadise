@@ -23,11 +23,14 @@
         </button>
         
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto navButtons">
+            <ul class="navbar-nav navButtons">
                 <li class="nav-item navButton">
-                    <div class="nav-link ml-3" style="margin-right: 100px;"><b>Hi Bhaikko, Hope You Having A Good Day. Happy Marketing. :)</b></div>
+                    <div class="nav-link ml-3" style="margin-right: 50px;"><b>Hi Bhaikko, Hope You Having A Good Day. Happy Marketing. :)</b></div>
                 </li>
-                <form action="/logout" method="GET">
+                <form action="/logout" method="GET" id="navForm">
+                    <li class="nav-item navButton">
+                        <a class="nav-link" href="myproducts.html">My Products</a>
+                    </li>
                     <li class="nav-item navButton">
                         <a class="nav-link" onclick="event.target.parentNode.parentNode.submit();">Sign Out</a>
                     </li>
