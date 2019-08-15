@@ -1,5 +1,14 @@
-const { Products, ProductGenres, Genres } = require("./database");
+const { Vendors, Products, ProductGenres, Genres } = require("./database");
 
+const addVendor = (companyName, companyAddress, companyMobile, companyEmail, password) => {
+    Vendors.create({
+        companyName, 
+        companyAddress,
+        companyMobile,
+        companyEmail,
+        password
+    });
+}
 
 const getGenreId = (genre) => {
     return Genres.findOne({
@@ -67,6 +76,7 @@ const deleteProduct = (vendorId, productId) => {
 }
 
 module.exports = {
+    addVendor,
     addProduct,
     getProducts,
     deleteProduct

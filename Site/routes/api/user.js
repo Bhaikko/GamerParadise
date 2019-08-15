@@ -3,6 +3,8 @@ const route = express.Router();
 
 const { passport } = require("./../../passport");
 
+const userdatabaseHandler = require("./../../database/userDatabaseHandler");
+
 const checkUserLogin = (req, res, next) => {
     if(!req.user || !req.user.get().name)
     {
@@ -11,6 +13,11 @@ const checkUserLogin = (req, res, next) => {
     }
     next();
 }
+
+route.post("/signup", (req, res, next) => {
+    userdatabaseHandler.addUser(req.body.name, req.body.address, req.body.email, req.body.mobile, req.body.password);
+    res.redirect("/login.html");
+})
 
 route.post("/login", passport.authenticate("user", {
     successRedirect: "/user",
@@ -23,7 +30,17 @@ route.use(checkUserLogin, (req, res, next) => {
 
 route.use(express.static(__dirname + "/../../private/user"));
 
+route.get("/getProductsHomepage", (req, res, next) => {
+    const productType = req.query.productType;
+    userdatabaseHandler.getProductsHomepage(productType)
+     .then(products => res.send(products));
+});
 
+route.get("/getProductsSearch", (req, res) => {
+    const name = req.query.name;
+    userdatabaseHandler.getProductsSearch(name)
+     .then(products => res.send(products));
+})
 
 
 module.exports = {

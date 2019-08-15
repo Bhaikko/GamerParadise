@@ -26,7 +26,7 @@ server.use(sessionMiddleware);
 server.use(passport.initialize());
 server.use(passport.session());
 
-server.use(express.static("./uploads"));
+server.use("/products", express.static("./uploads"));
 server.use(express.static("./public"));
 
 server.use("/user", userRouter);

@@ -16,6 +16,11 @@ const checkVendorLogin = (req, res, next) => {
     next();
 }
 
+route.post("/signup", (req, res, next) => {
+    vendorDatabaseHandler.addVendor(req.body.companyName, req.body.companyAddress, req.body.companyMobile, req.body.companyEmail, req.body.password);
+    res.redirect("/login.html");
+});
+
 route.post("/login", passport.authenticate("vendor", {
     successRedirect: "/vendor",
     failureRedirect: "/login.html"
