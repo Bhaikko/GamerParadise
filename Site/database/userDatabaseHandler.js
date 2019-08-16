@@ -1,4 +1,4 @@
-const { Users, Products, Vendors } = require("./database");  
+const { Users, Products, Vendors, Genres, ProductGenres } = require("./database");  
 const Op = require("sequelize").Op;
 
 const addUser = (name, address, email, mobile, password) => {
@@ -28,16 +28,66 @@ const getProductsHomepage = (productType) => {
 }
 
 const getProductsSearch = (name) => {
+    
     return Products.findAll({
         where: {
-            [Op.iLike]: "%" + name + "%"
+            name: {
+                [Op.like]: "%" + name + "%"
+            }
         }
     })
      .then(products => productParser(products));
 }
 
+const getProductsFiltered = (productType, productSubtype, genre, maxPrice, minPrice) => {
+    if(genre.length != 0)
+    {
+        if(typeof genre == "string")
+            genre = [genre];
+
+        console.log(genre);
+        return Products.findAll({
+            include: [Genres],
+            where: {
+                [Op.and]: {
+                    productType,
+                    productSubtype: {
+                        [Op.like]: "%" + productSubtype + "%"
+                    },
+                    price: {
+                        [Op.between]: [minPrice, maxPrice]
+                    },
+                    '$genres.genre$': {
+                        [Op.in]: genre
+                    }
+                }
+            }
+        })
+         .then(products => productParser(products));
+    }
+    else 
+    {
+        
+        return Products.findAll({
+            where: {
+                [Op.and]: {
+                    productType,
+                    productSubtype: {
+                        [Op.like]: "%" + productSubtype + "%"
+                    },
+                    price: {
+                        [Op.between]: [minPrice, maxPrice]
+                    }
+                }
+            }
+        })
+         .then(products => productParser(products));
+    }
+}
+
 module.exports = {
     addUser,
     getProductsHomepage,
-    getProductsSearch
+    getProductsSearch,
+    getProductsFiltered
 }

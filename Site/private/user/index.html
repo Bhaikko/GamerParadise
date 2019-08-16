@@ -25,7 +25,7 @@
         
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <form class="form-inline my-2 my-lg-0 searchBar">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="searchField">
                 <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
             </form>
             <ul class="navbar-nav mr-auto navButtons">
@@ -44,16 +44,16 @@
             </ul>
         </div>
     </nav>
-    <form class="filterMenu bg-dark text-light">
+    <form class="filterMenu bg-dark text-light" id="filterForm" method="POST">
         <div class="btn-group dropright">
-            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button type="button" class="btn btn-secondary dropdown-toggle" id="categoryButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Category
             </button>
             <div class="dropdown-menu">
                 <button type="button" class="dropdown-item" id="gamesButton">Games</button>
-                <button type="button" class="dropdown-item" id="componentsButton">PC Components</button>
+                <button type="button" class="dropdown-item" id="componentsButton">Components</button>
                 <button type="button" class="dropdown-item" id="accessoriesButton">Accessories</button>
-                <button type="button" class="dropdown-item" id="consolesButton">Consoles</button>
+                <button type="button" class="dropdown-item" id="consolesButton">Console</button>
             </div>
         </div>
         <br><br>
@@ -61,75 +61,121 @@
         <div id="genres" class="filter" hidden>
             <h3 class="text-light">GENRES</h3>
             <div>
-                <input type="checkbox" id="genre1" name="genre1" value="platform">
+                <input type="checkbox" id="genre1" name="genre" value="Platformer">
                 <label for="genre1">Platformer</label>
             </div>
             <div>
-                <input type="checkbox" id="genre2" name="genre2" value="shooter">
+                <input type="checkbox" id="genre2" name="genre" value="Shooter">
                 <label for="genre2">Shooter</label>
             </div>
             <div>
-                <input type="checkbox" id="genre3" name="genre3" value="stealth">
+                <input type="checkbox" id="genre3" name="genre" value="Stealth">
                 <label for="genre3">Steath</label>
             </div>
             <div>
-                <input type="checkbox" id="genre4" name="genre4" value="survival">
+                <input type="checkbox" id="genre4" name="genre" value="Survival">
                 <label for="genre4">Survival</label>
             </div>
             <div>
-                <input type="checkbox" id="genre5" name="genre5" value="battleRoyale">
+                <input type="checkbox" id="genre5" name="genre" value="Battle Royale">
                 <label for="genre5">Battle Royale</label>
             </div>
             <div>
-                <input type="checkbox" id="genre6" name="genre6" value="horror">
+                <input type="checkbox" id="genre6" name="genre" value="Horror">
                 <label for="genre6">Horror</label>
             </div>
             <div>
-                <input type="checkbox" id="genre7" name="genre7" value="racing">
+                <input type="checkbox" id="genre7" name="genre" value="Racing">
                 <label for="genre7">Racing</label>
             </div>
             <div>
-                <input type="checkbox" id="genre8" name="genre8" value="openworld">
+                <input type="checkbox" id="genre8" name="genre" value="Open World">
                 <label for="genre8">Open World</label>
             </div>
             <div>
-                <input type="checkbox" id="genre9" name="genre9" value="sports">
+                <input type="checkbox" id="genre9" name="genre" value="Sports">
                 <label for="genre9">Sports</label>
             </div>
             <div>
-                <input type="checkbox" id="genre10" name="genre10" value="fighting">
+                <input type="checkbox" id="genre10" name="genre" value="Fighting">
                 <label for="genre10">Fighting</label>
+            </div>
+            <br>
+            <h3 class="text-light">PLATFORMS</h3>
+            <div>
+                <input type="radio" id="platform1" name="productSubtype" value="PS1">
+                <label for="platform1">PS1</label>
+            </div>
+            <div>
+                <input type="radio" id="platform2" name="productSubtype" value="PS2">
+                <label for="platform2">PS2</label>
+            </div>
+            <div>
+                <input type="radio" id="platform3" name="productSubtype" value="PS3">
+                <label for="platform3">PS3</label>
+            </div>
+            <div>
+                <input type="radio" id="platform4" name="productSubtype" value="PS4">
+                <label for="platform4">PS4</label>
+            </div>
+            <div>
+                <input type="radio" id="platform5" name="productSubtype" value="Xbox">
+                <label for="platform5">Xbox</label>
+            </div>
+            <div>
+                <input type="radio" id="platform6" name="productSubtype" value="Xbox 360">
+                <label for="platform6">Xbox 360</label>
+            </div>
+            <div>
+                <input type="radio" id="platform7" name="productSubtype" value="Xbox One">
+                <label for="platform7">Xbox One</label>
+            </div>
+            <div>
+                <input type="radio" id="platform8" name="productSubtype" value="Wii">
+                <label for="platform8">Wii</label>
+            </div>
+            <div>
+                <input type="radio" id="platform9" name="productSubtype" value="Wii U">
+                <label for="platform9">Wii U</label>
+            </div>
+            <div>
+                <input type="radio" id="platform10" name="productSubtype" value="Switch">
+                <label for="platform10">Switch</label>
+            </div>
+            <div>
+                <input type="radio" id="platform11" name="productSubtype" value="PC">
+                <label for="platform11">PC</label>
             </div>
         </div>
 
         <div id="components" class="filter" hidden>
             <h3 class="text-light">TYPE</h3>
             <div>
-                <input type="radio" id="component1" name="component" value="gpu">
+                <input type="radio" id="component1" name="productSubtype" value="gpu">
                 <label for="component1">GPU</label>
             </div>
             <div>
-                <input type="radio" id="component2" name="component" value="cpu">
+                <input type="radio" id="component2" name="productSubtype" value="cpu">
                 <label for="component2">CPU</label>
             </div>
             <div>
-                <input type="radio" id="component3" name="component" value="motherboard">
+                <input type="radio" id="component3" name="productSubtype" value="motherboard">
                 <label for="component3">Motherboard</label>
             </div>
             <div>
-                <input type="radio" id="component4" name="component" value="memory">
+                <input type="radio" id="component4" name="productSubtype" value="memory">
                 <label for="component4">Memory</label>
             </div>
             <div>
-                <input type="radio" id="component5" name="component" value="storage">
+                <input type="radio" id="component5" name="productSubtype" value="storage">
                 <label for="component5">Storage</label>
             </div>
             <div>
-                <input type="radio" id="component6" name="component" value="psu">
+                <input type="radio" id="component6" name="productSubtype" value="psu">
                 <label for="component6">Power Supply Unit</label>
             </div>
             <div>
-                <input type="radio" id="component7" name="component" value="cabinet">
+                <input type="radio" id="component7" name="productSubtype" value="cabinet">
                 <label for="component7">Cabinet</label>
             </div>
         </div>
@@ -137,23 +183,23 @@
         <div id="accessories" class="filter" hidden>
             <h3 class="text-light">TYPE</h3>
             <div>
-                <input type="radio" id="accessory1" name="accessory" value="keyboard">
+                <input type="radio" id="accessory1" name="productSubtype" value="keyboard">
                 <label for="accessory1">Keyboard</label>
             </div>
             <div>
-                <input type="radio" id="accessory2" name="accessory" value="mouse">
+                <input type="radio" id="accessory2" name="productSubtype" value="mouse">
                 <label for="accessory2">Mouse</label>
             </div>
             <div>
-                <input type="radio" id="accessory3" name="accessory" value="mousepad">
+                <input type="radio" id="accessory3" name="productSubtype" value="mousepad">
                 <label for="accessory3">Mousepad</label>
             </div>
             <div>
-                <input type="radio" id="accessory4" name="accessory" value="controller">
+                <input type="radio" id="accessory4" name="productSubtype" value="controller">
                 <label for="accessory4">Controller</label>
             </div>
             <div>
-                <input type="radio" id="accessory5" name="accessory" value="headset">
+                <input type="radio" id="accessory5" name="productSubtype" value="headset">
                 <label for="accessory5">Headset</label>
             </div>
         </div>
@@ -161,15 +207,15 @@
         <div id="companies" class="filter" hidden>
                 <h3 class="text-light">COMPANIES</h3>
             <div>
-                <input type="radio" id="company1" name="company" value="sony">
+                <input type="radio" id="company1" name="productSubtype" value="sony">
                 <label for="company1">Sony</label>
             </div>
             <div>
-                <input type="radio" id="company2" name="company" value="microsoft">
+                <input type="radio" id="company2" name="productSubtype" value="microsoft">
                 <label for="company2">Microsoft</label>
             </div>
             <div>
-                <input type="radio" id="company3" name="company" value="nintendo">
+                <input type="radio" id="company3" name="productSubtype" value="nintendo">
                 <label for="company3">Nintendo</label>
             </div>
         </div>
@@ -187,7 +233,7 @@
             </div>
         </div>
         <br>
-        <button type="button" class="btn btn-light " id="filterButton">Filter Searches</button>
+        <button type="submit" class="btn btn-light " id="filterButton">Filter Searches</button>
     </form>
 
     <div class="container" id="content">
@@ -227,28 +273,8 @@
             </div>
         </div>
         
-    
+        <!-- QUERIED PAGE -->
         <!-- <div class="row ml-4 mt-5">
-            <div class="col mb-3">
-                <div class="card" style="width: 18rem;">
-                    <img src="Images/Game.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <a href="/user/games/1"><h5 class="card-title">Dying Light</h5></a>
-                        <p class="card-text">₹ 5000</p>
-                        <button type="button" class="btn btn-danger">Add To Cart</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col mb-3">
-                <div class="card" style="width: 18rem;">
-                    <img src="Images/Game.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <a href="/user/games/1"><h5 class="card-title">Dying Light</h5></a>
-                        <p class="card-text">₹ 5000</p>
-                        <button type="button" class="btn btn-danger">Add To Cart</button>
-                    </div>
-                </div>
-            </div>
             <div class="col mb-3">
                 <div class="card" style="width: 18rem;">
                     <img src="Images/Game.jpg" class="card-img-top" alt="...">
@@ -262,6 +288,7 @@
         </div> -->
     </div>
 
+    <!-- CART -->
     <div id="cart">
         <img id="cartButton" src="Images/Cart.png">
         <div id="cartContent">
