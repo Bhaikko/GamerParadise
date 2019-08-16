@@ -1,4 +1,4 @@
-const { Users, Products, Vendors, Genres, ProductGenres } = require("./database");  
+const { Users, Products, Genres, Vendors, Reviews } = require("./database");  
 const Op = require("sequelize").Op;
 
 const addUser = (name, address, email, mobile, password) => {
@@ -45,7 +45,7 @@ const getProductsFiltered = (productType, productSubtype, genre, maxPrice, minPr
         if(typeof genre == "string")
             genre = [genre];
 
-        console.log(genre);
+        
         return Products.findAll({
             include: [Genres],
             where: {
@@ -85,9 +85,21 @@ const getProductsFiltered = (productType, productSubtype, genre, maxPrice, minPr
     }
 }
 
+const getProductDetails = (productId) => {
+    return Products.findOne({
+        include: [Genres, Reviews, {model: Vendors, attributes: ["companyName"]}],
+        attributes: ["image", "name", "price"],
+        where: {
+            id: productId
+        }
+    })
+     .then(products => products);
+}
+
 module.exports = {
     addUser,
     getProductsHomepage,
     getProductsSearch,
-    getProductsFiltered
+    getProductsFiltered,
+    getProductDetails
 }

@@ -38,7 +38,6 @@ route.get("/getProductsHomepage", (req, res, next) => {
 
 route.get("/getProductsSearch", (req, res) => {
     const name = req.query.name;
-    // console.log(name);
     userdatabaseHandler.getProductsSearch(name)
      .then(products => res.send(products));
 });
@@ -47,6 +46,15 @@ route.get("/getProductsFiltered", (req, res) => {
     userdatabaseHandler.getProductsFiltered(req.query.productType || "", req.query.productSubtype || "", req.query.genre || [], req.query.maxPrice || "999999999", req.query.minPrice || "0")
      .then(products => res.send(products));
     
+});
+
+route.get("/product/:id", (req, res) => {
+    res.redirect("/user/product.html?id=" + req.params.id);
+})
+
+route.get("/getProductDetails/:id", (req, res) => {
+    userdatabaseHandler.getProductDetails(req.params.id)
+     .then(products => res.send(products));
 })
 
 

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="product.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <img src="./Images/logo.png" width="50">
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto navButtons">
+                <li class="nav-item navButton">
+                    <div class="nav-link" style="margin-right: 100px;"><b>Hi Bhaikko</b></div>
+                </li>
+                <li class="nav-item navButton">
+                    <a class="nav-link" href="orders.html">Orders</a>
+                </li>
+                <form action="/logout" method="GET">
+                    <li class="nav-item navButton">
+                        <a class="nav-link" onclick="event.target.parentNode.parentNode.submit();">Sign Out</a>
+                    </li>
+                </form>
+                
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row" id="productBox">
+            <div class="col-4">
+                <img src="./Images/Game.jpg" class="orderImage">
+            </div>
+            <div class="col-4">
+                <div><u>Name: </u><h3>Dying Light</h3></div>
+                <div><u>Price: </u><h4>5000</h4></div>
+                <div><u>Vendor: </u><h4>Bhaikko</h4></div>
+            
+                <button type="button" class="btn btn-danger" id="addToCart">Add To Cart</button>
+                <button type="button" class="btn btn-warning" id="addReviewButton">Add Review</button>
+            </div>
+            <div class="col-4">
+                <div class="reviews">
+                    <h3>Reviews</h3>
+                    <hr>
+                    <div class="review">
+                        <span><h5>Bhaikko </h5><span>* * * *</span></span>
+                        <br>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus commodi ducimus nulla iusto pariatur, ullam dicta laborum sapiente aliquam exercitationem dolor asperiores optio rerum. Alias dolorum maiores culpa dignissimos. Fugiat.</p>
+                    </div>
+                    <hr>
+                    <div class="review">
+                        <span><h5>Bhaikko </h5><span>* * * *</span></span>
+                        <br>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus commodi ducimus nulla iusto pariatur, ullam dicta laborum sapiente aliquam exercitationem dolor asperiores optio rerum. Alias dolorum maiores culpa dignissimos. Fugiat.</p>
+                    </div>
+                    <hr>
+                    
+                </div>
+            </div>            
+        </div>
+    </div>
+
+
+    <script src="product.js"></script>    
+</body>
+</html>

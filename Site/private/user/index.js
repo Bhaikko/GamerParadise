@@ -46,7 +46,7 @@ consolesButton.click(() => {
     categoryButton.text("Console");
 });
 
-let content = $("#content");
+// let content = $("#content");
 let searchBar = $(".searchBar");
 
 
@@ -55,7 +55,6 @@ const render = (products) => {
     products.map(product => {
         productBox.append(
             `
-            
                 <div class="col mb-3 p-2" value=${product.id}>
                     <div class="card" style="width: 18rem;">
                         <img src="/products/${product.image}" class="card-img-top" alt="...">

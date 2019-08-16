@@ -1,0 +1,32 @@
+body {
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+
+.navButtons {
+    position: absolute;
+    right: 10px;
+}
+
+.container {
+    margin-top: 100px;
+}
+
+.orderImage {
+    width: 100%;
+    box-shadow: 2px 2px lightgrey;
+    height: 50%;
+}
+
+.reviews {
+    padding: 10px;
+    border: 2px solid black;
+    height: 500px;
+    overflow-y: auto;
+}
+
+h5 {
+    display: inline-block;
+    margin-right: 50%;
+}
