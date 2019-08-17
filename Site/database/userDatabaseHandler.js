@@ -87,19 +87,38 @@ const getProductsFiltered = (productType, productSubtype, genre, maxPrice, minPr
 
 const getProductDetails = (productId) => {
     return Products.findOne({
-        include: [Genres, Reviews, {model: Vendors, attributes: ["companyName"]}],
+        include: [
+                    {model: Genres, attributes: ["genre"]}, 
+                    {
+                        model: Reviews, 
+                        attributes: ["userId", "stars", "review"],
+                        include: {model: Users, attributes: ["name"]}   
+                    },
+                    {model: Vendors, attributes: ["companyName"]}
+                ],
         attributes: ["image", "name", "price"],
         where: {
             id: productId
         }
     })
-     .then(products => products);
+     .then(product => product);
 }
+
+const addReview = (review, stars, productId, userId) => {
+    Reviews.create({
+        review,
+        stars,
+        productId,
+        userId
+    });
+}
+
 
 module.exports = {
     addUser,
     getProductsHomepage,
     getProductsSearch,
     getProductsFiltered,
-    getProductDetails
+    getProductDetails,
+    addReview
 }

@@ -4,9 +4,29 @@ const id = lastUrl.split("?")[1].split("=")[1];
 
 
 $.get("/user/getProductDetails/" + id, (productDetails) => {
-    console.log(productDetails);
     let productBox = $("#productBox");
     productBox.empty();
+
+    let reviews = "";
+    let stars = "";
+
+    productDetails.reviews.map(review => {
+        for (let i = 1 ; i <= review.stars ; i++)
+        {
+            stars+=`<img src="Images/star.jpeg" width="15px">`
+        }
+        reviews += 
+        `
+            <div class="review">
+                <span><h5>${review.user.name} </h5><span>${stars}</span></span>
+                <br>
+                <p>${review.review}</p>
+            </div>
+            <hr>
+        `
+        stars = "";
+    })
+
     productBox.append(
         `
             <div class="col-4">
@@ -18,27 +38,29 @@ $.get("/user/getProductDetails/" + id, (productDetails) => {
                 <div><u>Vendor: </u><h4>${productDetails.vendor.companyName}</h4></div>
             
                 <button type="button" class="btn btn-danger" id="addToCart">Add To Cart</button>
-                <button type="button" class="btn btn-warning" id="addReviewButton">Add Review</button>
+                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModalCenter">
+                    Add Review
+                </button>
             </div>
             <div class="col-4">
                 <div class="reviews">
                     <h3>Reviews</h3>
                     <hr>
-                    <div class="review">
-                        <span><h5>Bhaikko </h5><span>* * * *</span></span>
-                        <br>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus commodi ducimus nulla iusto pariatur, ullam dicta laborum sapiente aliquam exercitationem dolor asperiores optio rerum. Alias dolorum maiores culpa dignissimos. Fugiat.</p>
-                    </div>
-                    <hr>
-                    <div class="review">
-                        <span><h5>Bhaikko </h5><span>* * * *</span></span>
-                        <br>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus commodi ducimus nulla iusto pariatur, ullam dicta laborum sapiente aliquam exercitationem dolor asperiores optio rerum. Alias dolorum maiores culpa dignissimos. Fugiat.</p>
-                    </div>
-                    <hr>
-                    
+                    ${reviews}                   
                 </div>
             </div>    
         `
     )
+});
+
+
+const submitReviewButton = $("#submitReview");
+const submitReviewForm = $("#submitReviewForm");
+
+submitReviewForm.submit(() => {
+    $("<input />").attr("type", "hidden")
+        .attr("name", "productId")
+        .attr("value", id)
+        .appendTo(submitReviewForm);
+    return true;
 })

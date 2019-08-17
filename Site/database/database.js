@@ -137,6 +137,8 @@ Genres.belongsToMany(Products, { through: ProductGenres});
 
 Reviews.belongsTo(Products);
 Products.hasMany(Reviews);
+Reviews.belongsTo(Users);
+Users.hasMany(Reviews);
 
 module.exports = {
     database,

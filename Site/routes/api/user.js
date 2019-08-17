@@ -57,6 +57,10 @@ route.get("/getProductDetails/:id", (req, res) => {
      .then(products => res.send(products));
 })
 
+route.post("/addReview", (req, res) => {
+    userdatabaseHandler.addReview(req.body.reviewText, req.body.reviewStars, req.body.productId, req.user.id)
+    res.redirect("/user/product.html?id=" + req.body.productId);
+})
 
 module.exports = {
     route 
