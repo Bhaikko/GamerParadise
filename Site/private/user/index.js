@@ -107,7 +107,9 @@ filterForm.submit((event) => {
     // genre=Platformer&genre=Shooter&productSubtype=PS1&minPrice=4000&maxPrice=5000
 });
 
-$.get("/user/getCartItems", cartItems => {
+const renderCart = (cartItems) => {
+    cartTable.empty();
+    total.text(0);
     cartItems.map(cartItem => {
         cartTable.append(
             `
@@ -130,55 +132,20 @@ $.get("/user/getCartItems", cartItems => {
                     <td><button type="button" class="btn btn-danger delete">X</button></td>
                 </tr>
             `
-        );
+        )
         total.text(parseInt(total.text()) + parseInt(cartItem.product.price * cartItem.quantity));
-    });
-});
+    });    
+}
+
+
+
+$.get("/user/getCartItems", renderCart);
 
 
 const addToCart = (cartItem) => {
-
     $.post("/user/addCartItem", {
         productId: cartItem.id 
-    }, response => {
-        if(response == "created")
-        {
-            const newItem = 
-            `
-                <tr data-productid="${cartItem.id}">
-                    <td>${cartItem.name}</td>
-                    <td>
-                        <div class="btn-group dropdown">
-                            <button type="button" class="btn btn-secondary dropdown-toggle" id="categoryButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                ${cartItem.quantity}
-                            </button>
-                            <div class="dropdown-menu">
-                                <button type="button" class="dropdown-item quantitySelector">1</button>
-                                <button type="button" class="dropdown-item quantitySelector">2</button>
-                                <button type="button" class="dropdown-item quantitySelector">3</button>
-                                <button type="button" class="dropdown-item quantitySelector">4</button>
-                            </div>
-                        </div>
-                    </td>
-                    <td>${cartItem.price}</td>
-                    <td><button type="button" class="btn btn-danger delete">X</button></td>
-                </tr>
-            `
-
-            cartTable.append(newItem);   
-        }
-        else 
-        {
-            let cartItems = cartTable[0].children;
-            
-            for(let i = 0 ; i < cartItems.length ; i++)
-            {
-                if(cartItems[i].children[0].innerText == cartItem.name)
-                    cartItems[i].children[1].children[0].children[0].innerText = parseInt(cartItems[i].children[1].children[0].children[0].innerText) + 1;
-            }
-        }
-    })
-   
+    }, () => $.get("/user/getCartItems", renderCart));
 }
 
 $(document).on("click", ".addToCart", event => {
@@ -190,7 +157,6 @@ $(document).on("click", ".addToCart", event => {
         quantity: 1,
     }
     addToCart(cartItem);
-    total.text(parseInt(total.text()) + parseInt(event.target.getAttribute("data-price")));
 });
 
 $(document).on("click", ".delete", event => {
@@ -200,9 +166,8 @@ $(document).on("click", ".delete", event => {
         data: {
             productId: event.target.parentNode.parentNode.getAttribute("data-productid")
         },
-        success: () => {
-            event.target.parentNode.parentNode.remove();
-        }
+        success: () => $.get("/user/getCartItems", renderCart)
+        
     });
 })
 
@@ -215,10 +180,7 @@ $(document).on("click", ".quantitySelector", event => {
             productId: event.target.parentNode.parentNode.parentNode.parentNode.getAttribute("data-productid"),
             quantity: event.target.innerText
         },
-        success: () => {
-            event.target.parentNode.parentNode.children[0].innerText = event.target.innerText;
-            total.text(total.text() - (parseInt(event.target.parentNode.parentNode.parentNode.parentNode.getAttribute("data-productid")) * parseInt(event.target.innerText)))
-        }
+        success: () => $.get("/user/getCartItems", renderCart)
     })
 })
 
