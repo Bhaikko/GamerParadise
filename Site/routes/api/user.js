@@ -62,6 +62,26 @@ route.post("/addReview", (req, res) => {
     res.redirect("/user/product.html?id=" + req.body.productId);
 })
 
+route.post("/addCartItem", (req, res) => {
+    userdatabaseHandler.addCartItem(req.user.id, req.body.productId)
+     .then(status => res.send(status));
+});
+
+route.get("/getCartItems", (req, res) => {
+    userdatabaseHandler.getCartItems(req.user.id)
+     .then(cartItems => res.send(cartItems));
+})
+
+route.delete("/deleteCartItem", (req, res) => {
+    userdatabaseHandler.deleteCartItem(req.body.productId, req.user.id);
+    res.sendStatus(200);
+})
+
+route.patch("/updateQuantity", (req, res) => {
+    userdatabaseHandler.updateQuantity(req.body.productId, req.user.id, req.body.quantity);
+    res.sendStatus(200);
+})
+
 module.exports = {
     route 
 }

@@ -74,12 +74,13 @@ body {
     right: 0px;
 }
 
+
 #cartContent {
     border-radius: 2%;
     position: absolute;
     height: 500px;
-    width: 300px;
-    right: -300px;
+    width: 500px;
+    right: -500px;
     background-color: #005EA6;
     transition: 0.5s;
     padding: 30px;

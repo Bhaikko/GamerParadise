@@ -1,4 +1,4 @@
-const { Users, Products, Genres, Vendors, Reviews } = require("./database");  
+const { Users, Products, Genres, Vendors, Reviews, CartItems } = require("./database");  
 const Op = require("sequelize").Op;
 
 const addUser = (name, address, email, mobile, password) => {
@@ -113,6 +113,73 @@ const addReview = (review, stars, productId, userId) => {
     });
 }
 
+const addCartItem = (userId, productId) => {
+    return CartItems.findOne({
+        where: {
+            userId: userId,
+            productId: productId
+        }
+    
+    })
+    .then(cartitem => {
+        
+        if(cartitem)
+        {
+            return CartItems.update({
+                quantity: parseInt(cartitem.quantity) + 1
+            },
+            {
+                where: {
+                    userId,
+                    productId
+                }           
+            })
+             .then(() => "exist");
+        }
+        else
+        {
+            return CartItems.create({
+                userId,
+                productId,
+                quantity: 1
+            })
+             .then(() => "created");
+        }
+    });
+}
+
+const getCartItems = (userId) => {
+    return CartItems.findAll({
+        include: [{model: Products, attributes: ["name", "price", "id"]}],
+        attributes: ["quantity"],
+        where: {
+            userId 
+        }
+    })
+     .then(cartItems => productParser(cartItems));
+}
+
+const deleteCartItem = (productId, userId) => {
+    CartItems.destroy({
+        where: {
+            productId,
+            userId
+        }
+    });
+}
+
+const updateQuantity = (productId, userId, quantity) => {
+    CartItems.update({
+        quantity
+    },
+    {
+        where: {
+            userId,
+            productId
+        }           
+    })
+}
+
 
 module.exports = {
     addUser,
@@ -120,5 +187,9 @@ module.exports = {
     getProductsSearch,
     getProductsFiltered,
     getProductDetails,
-    addReview
+    addReview,
+    addCartItem,
+    getCartItems,
+    deleteCartItem,
+    updateQuantity
 }

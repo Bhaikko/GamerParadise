@@ -296,38 +296,16 @@
             <table class="table table-dark">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
                         <th scope="col">Item</th>
+                        <th scope="col">Quantity</th>
                         <th scope="col">Price</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Dying Light</td>
-                        <td>5000</td>
-                        <td><button type="button" class="btn btn-danger">X</button></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Dying Light</td>
-                        <td>5000</td>
-                        <td><button type="button" class="btn btn-danger">X</button></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Dying Light</td>
-                        <td>5000</td>
-                        <td><button type="button" class="btn btn-danger">X</button></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Dying Light</td>
-                        <td>5000</td>
-                        <td><button type="button" class="btn btn-danger">X</button></td>
-                    </tr>
+                <tbody id="cartTable">
+                    
                 </tbody>
             </table>
+            <h4 class="text-light">Total: <span id="total"> 0 </span></h4>
             <button type="button" class="btn btn-danger" onclick="window.location='/user/payment.html'">Checkout</button>
         </div>
     </div>
