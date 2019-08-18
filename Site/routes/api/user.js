@@ -82,6 +82,32 @@ route.patch("/updateQuantity", (req, res) => {
     res.sendStatus(200);
 })
 
+route.get("/getOrderDetails", (req, res) => {
+    userdatabaseHandler.getOrderDetails(req.user.id)
+     .then(cartItems => res.send(cartItems));
+});
+
+route.post("/placeOrder", (req, res) => {
+
+    userdatabaseHandler.getOrderDetails(req.user.id)
+    .then(cartItems => {
+        // console.log(JSON.parse(JSON.stringify(cartItems)));
+        const dateObject = new Date();
+        let time = dateObject.toTimeString().split(" ")[0].split(":");
+        time.pop();
+        time = time[0] + ":" + time[1];
+        const date = dateObject.toDateString();
+
+        const databaseTime = time + " " + date;
+        
+        Promise.all(cartItems.map(cartItem => {
+            userdatabaseHandler.addToOrder(databaseTime, cartItem.quantity, req.body.method, req.user.id, cartItem.productId, cartItem.product.vendor.id)
+        }))
+        .then(() => userdatabaseHandler.emptyCartList(req.user.id))
+        .then(() => res.redirect("/user"));
+    });
+});
+
 module.exports = {
     route 
 }

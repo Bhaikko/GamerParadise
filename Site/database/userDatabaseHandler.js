@@ -1,4 +1,4 @@
-const { Users, Products, Genres, Vendors, Reviews, CartItems } = require("./database");  
+const { Users, Products, Genres, Vendors, Reviews, CartItems, Orders } = require("./database");  
 const Op = require("sequelize").Op;
 
 const addUser = (name, address, email, mobile, password) => {
@@ -180,6 +180,48 @@ const updateQuantity = (productId, userId, quantity) => {
     })
 }
 
+const getOrderDetails = (userId) => {
+    return CartItems.findAll({
+        include: [
+            {
+                model: Products, 
+                attributes: ["name", "price"],
+                include: {
+                    model: Vendors,
+                    attributes: ["companyName", "id"]
+                }
+            },
+            {
+                model: Users,
+                attributes: ["name"]
+            }
+        ],
+        attributes: ["id", "quantity", "userId", "productId"],
+        where: {
+            userId
+        }
+    })
+     .then(products => productParser(products));
+}
+
+const addToOrder = (time, quantity, method, userId, productId, vendorId) => {
+    return Orders.create({
+        time,
+        quantity,
+        method,
+        userId,
+        productId,
+        vendorId
+    });
+}
+
+const emptyCartList = (userId) => {
+    return CartItems.destroy({
+        where: {
+            userId
+        }
+    })
+}
 
 module.exports = {
     addUser,
@@ -191,5 +233,8 @@ module.exports = {
     addCartItem,
     getCartItems,
     deleteCartItem,
-    updateQuantity
+    updateQuantity,
+    getOrderDetails,
+    addToOrder,
+    emptyCartList
 }

@@ -53,6 +53,10 @@ const Orders = database.define("orders", {
     status: {
         type: Sequelize.STRING,
         defaultValue: "Confirmation Pending"
+    },
+    method: {
+        type: Sequelize.STRING,
+        allowNull: false
     }
 });
 

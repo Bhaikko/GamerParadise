@@ -84,6 +84,5 @@ body {
     background-color: #005EA6;
     transition: 0.5s;
     padding: 30px;
-    /* max-height: 500px; */
     overflow-y: auto;
 }
