@@ -123,6 +123,16 @@ const declineOrder = (orderId) => {
     });
 }
 
+const getUsername = (vendorId) => {
+    return Vendors.findOne({
+        where: {
+            id: vendorId
+        },
+        attributes: ["companyName"]
+    })
+     .then(vendor => vendor);
+}
+
 module.exports = {
     addVendor,
     addProduct,
@@ -130,5 +140,6 @@ module.exports = {
     deleteProduct,
     getOrders,
     dispatchOrder,
-    declineOrder
+    declineOrder,
+    getUsername
 }

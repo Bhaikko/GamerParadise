@@ -223,6 +223,41 @@ const emptyCartList = (userId) => {
     })
 }
 
+const getOrders = (userId) => {
+    return Orders.findAll({
+        where: {
+            userId 
+        },
+        attributes: ["quantity", "time", "method", "status"],
+        include: [
+            {
+                model: Vendors,
+                attributes: ["companyName", "companyEmail", "companyMobile"]
+            },
+            {
+                model: Products,
+                attributes: ["id", "name", "price", "image"]
+            },
+            {
+                model: Users,
+                attributes: ["name"]
+            }
+        ]
+    })
+    .then(orders => productParser(orders));
+}
+
+const getUsername = (userId) => {
+    return Users.findOne({
+        where: {
+            id: userId 
+        },
+        attributes: ["name"]
+
+    })
+     .then(user => user);
+}
+
 module.exports = {
     addUser,
     getProductsHomepage,
@@ -236,5 +271,7 @@ module.exports = {
     updateQuantity,
     getOrderDetails,
     addToOrder,
-    emptyCartList
+    emptyCartList,
+    getOrders,
+    getUsername
 }

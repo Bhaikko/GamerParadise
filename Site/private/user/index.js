@@ -25,6 +25,11 @@ disableFilters();
 
 const categoryButton = $("#categoryButton");
 
+
+$.get("/user/getUsername", user => {
+    $("#username").text("Hi " + user.name);
+});
+
 gamesButton.click(() => {
     disableFilters();
     genres[0].removeAttribute("hidden");

@@ -108,6 +108,16 @@ route.post("/placeOrder", (req, res) => {
     });
 });
 
+route.get("/getOrders", (req, res) => {
+    userdatabaseHandler.getOrders(req.user.id)
+     .then(orders => res.send(orders));
+});
+
+route.get("/getUsername", (req, res) => {
+    userdatabaseHandler.getUsername(req.user.id)
+     .then(user => res.send(user));
+})
+
 module.exports = {
     route 
 }

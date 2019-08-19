@@ -62,6 +62,11 @@ route.use(checkVendorLogin, (req, res, next) => {
     next();
 });
 
+route.get("/getUsername", (req, res) => {
+    vendorDatabaseHandler.getUsername(req.user.id)
+     .then(user => res.send(user));
+})
+
 route.use(express.static(__dirname + "/../../private/vendor"));
 
 module.exports = {

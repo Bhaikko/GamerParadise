@@ -21,6 +21,10 @@ disableFilters();
 
 let productType = null;
 
+$.get("/vendor/getUsername", user => {
+    $("#username").text("Hi " + user.companyName);
+});
+
 gamesButton.click(() => {
     disableFilters();
     genres[0].removeAttribute("hidden");
