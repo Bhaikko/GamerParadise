@@ -41,7 +41,22 @@ route.get("/products", (req, res, next) => {
 route.delete("/deleteProduct", (req, res, next) => {
     vendorDatabaseHandler.deleteProduct(req.user.get().id, req.body.id);
     res.sendStatus(200);
-})
+});
+
+route.get("/getOrders", (req, res) => {
+    vendorDatabaseHandler.getOrders(req.user.id)
+     .then(orders => res.send(orders));
+});
+
+route.patch("/dispatchOrder", (req, res) => {
+    vendorDatabaseHandler.dispatchOrder(req.body.id)
+     .then(() => res.sendStatus(200));
+});
+
+route.patch("/declineOrder", (req, res) => {
+    vendorDatabaseHandler.declineOrder(req.body.id)
+     .then(() => res.sendStatus(200));
+});
 
 route.use(checkVendorLogin, (req, res, next) => {
     next();

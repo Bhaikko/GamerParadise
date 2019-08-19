@@ -12,7 +12,8 @@
 }
 
 .orderImage {
-    width: 100px;
+    width: 100%;
+    height: 100px;
 }
 
 .newitemBox {
@@ -24,7 +25,7 @@
 }
 
 #navForm {
-    margin-left: 40%;
+    margin-left: 35%;
 }
 
 #navForm li {

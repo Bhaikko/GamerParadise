@@ -1,4 +1,10 @@
-const { Vendors, Products, ProductGenres, Genres } = require("./database");
+const { Vendors, Products, ProductGenres, Genres, Orders, Users } = require("./database");
+
+const productParser = (products) => {
+    let productsData = [];
+    products.map(product => productsData.push(product.get()))
+    return productsData;
+}
 
 const addVendor = (companyName, companyAddress, companyMobile, companyEmail, password) => {
     Vendors.create({
@@ -75,9 +81,54 @@ const deleteProduct = (vendorId, productId) => {
     })
 }
 
+const getOrders = (vendorId) => {
+    return Orders.findAll({
+        where: {
+            vendorId
+        },
+        attributes: ["id", "quantity", "method", "time", "status"],
+        include: [
+            {
+                model: Users,
+                attributes: ["name", "address", "mobile"]
+            },
+            {
+                model: Products,
+                attributes: ["name", "price", "image"]
+            }
+        ]
+    })
+     .then(orders => productParser(orders));
+}
+
+const dispatchOrder = (orderId) => {
+    return Orders.update({
+        status: "Dispatched"
+    },
+    {
+        where: {
+            id: orderId
+        }           
+    });
+}
+
+const declineOrder = (orderId) => {
+    return Orders.update({
+        status: "Declined"
+    },
+    {
+        where: {
+            id: orderId
+        }           
+    });
+}
+
 module.exports = {
     addVendor,
     addProduct,
     getProducts,
-    deleteProduct
+    deleteProduct,
+    getOrders,
+    dispatchOrder,
+    declineOrder
 }
