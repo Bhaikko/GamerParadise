@@ -25,3 +25,24 @@ vendorSignupButton.addEventListener("click", () => {
     userSignupButton.classList.add("btn-secondary");
     userSignupButton.classList.remove("btn-primary");
 });
+
+$("#userSignupFormButton").click(event => {
+    event.preventDefault();
+
+    $.post("/user/checkCredentials", {
+        email: $("#userEmail").val()
+    })
+     .then(res => {
+         
+        if(res == "Exist")
+            $("#userSignupError")[0].removeAttribute("hidden");
+        else 
+        {
+            if(userForm[0].checkValidity())
+                userForm.submit();
+            else 
+                alert("Fill All Fields Please");
+        }
+            
+     })
+})

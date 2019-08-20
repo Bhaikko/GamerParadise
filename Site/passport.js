@@ -29,8 +29,8 @@ passport.use("vendor", new LocalStrategy((username, password, done) => {
         .then(user => {
             if(!user)
                 return done(null, false, {  message: "No User Exist"});
-            else if(user.password != password)
-            // else if(bcrypt.compare(password, user.password, (err, res) => res))
+            // else if(user.password != password)
+            else if(bcrypt.compare(password, user.password, (err, res) => res))
                 return done(null, false, {  message: "Wrong Username Or Password"});
             else 
                 done(null, user);

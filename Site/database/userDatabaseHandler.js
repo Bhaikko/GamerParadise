@@ -263,6 +263,20 @@ const getUsername = (userId) => {
      .then(user => user);
 }
 
+const checkEmail = (email) => {
+    return Users.findOne({
+        where: {
+            email 
+        }
+    })
+     .then(user => {
+        if(user)
+            return "Exist";
+        else 
+            return "Nope";
+     });
+}
+
 module.exports = {
     addUser,
     getProductsHomepage,
@@ -278,5 +292,6 @@ module.exports = {
     addToOrder,
     emptyCartList,
     getOrders,
-    getUsername
+    getUsername,
+    checkEmail
 }

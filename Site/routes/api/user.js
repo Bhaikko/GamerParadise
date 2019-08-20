@@ -15,6 +15,13 @@ const checkUserLogin = (req, res, next) => {
     next();
 }
 
+route.post("/checkCredentials", (req, res) => {
+    userdatabaseHandler.checkEmail(req.body.email)
+     .then(response => {
+         res.send(response)
+     });
+});
+
 route.post("/signup", (req, res, next) => {
     userdatabaseHandler.addUser(req.body.name, req.body.address, req.body.email, req.body.mobile, req.body.password);
     res.redirect("/login.html");
@@ -117,7 +124,9 @@ route.get("/getOrders", (req, res) => {
 route.get("/getUsername", (req, res) => {
     userdatabaseHandler.getUsername(req.user.id)
      .then(user => res.send(user));
-})
+});
+
+
 
 module.exports = {
     route 
