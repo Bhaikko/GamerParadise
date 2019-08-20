@@ -1,6 +1,7 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const { Users, Vendors } = require("./database/database");
+const bcrypt = require("bcrypt");
 
 
 passport.use("user", new LocalStrategy((username, password, done) => {
@@ -12,7 +13,7 @@ passport.use("user", new LocalStrategy((username, password, done) => {
         .then(user => {
             if(!user)
                 return done(null, false, {  message: "No User Exist"});
-            else if(user.password != password)
+            else if(bcrypt.compare(password, user.password, (err, res) => res))
                 return done(null, false, {  message: "Wrong Username Or Password"});
             else 
                 done(null, user);
@@ -29,6 +30,7 @@ passport.use("vendor", new LocalStrategy((username, password, done) => {
             if(!user)
                 return done(null, false, {  message: "No User Exist"});
             else if(user.password != password)
+            // else if(bcrypt.compare(password, user.password, (err, res) => res))
                 return done(null, false, {  message: "Wrong Username Or Password"});
             else 
                 done(null, user);

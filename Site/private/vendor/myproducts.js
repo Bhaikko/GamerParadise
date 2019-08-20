@@ -10,6 +10,10 @@ const consolesBox = $("#consoles");
 
 let deleteProductButtons = $(".deleteProductButton");
 
+$.get("/vendor/getUsername", user => {
+    $("#username").text("Hi " + user.companyName);
+});
+
 const render = (box, products) => {
     box.empty();
     products.map((product) => {

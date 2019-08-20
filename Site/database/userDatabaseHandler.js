@@ -1,14 +1,19 @@
 const { Users, Products, Genres, Vendors, Reviews, CartItems, Orders } = require("./database");  
 const Op = require("sequelize").Op;
+const bcrypt = require("bcrypt");
+
 
 const addUser = (name, address, email, mobile, password) => {
-    Users.create({
-        name,
-        address,
-        email,
-        mobile,
-        password
-    });
+    bcrypt.hash(password, 10, function(err, hash) {
+        
+        Users.create({
+            name,
+            address,
+            email,
+            mobile,
+            password: hash
+        });
+    });   
 }
 
 const productParser = (products) => {

@@ -1,4 +1,5 @@
 const { Vendors, Products, ProductGenres, Genres, Orders, Users } = require("./database");
+const bcrypt = require("bcrypt");
 
 const productParser = (products) => {
     let productsData = [];
@@ -7,13 +8,16 @@ const productParser = (products) => {
 }
 
 const addVendor = (companyName, companyAddress, companyMobile, companyEmail, password) => {
-    Vendors.create({
-        companyName, 
-        companyAddress,
-        companyMobile,
-        companyEmail,
-        password
-    });
+    bcrypt.hash(password, 10, function(err, hash) {
+        Vendors.create({
+            companyName, 
+            companyAddress,
+            companyMobile,
+            companyEmail,
+            password: hash
+        });
+    });   
+    
 }
 
 const getGenreId = (genre) => {

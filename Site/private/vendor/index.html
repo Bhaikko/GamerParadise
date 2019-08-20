@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta 
+        name="viewport" 
+        content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'
+    >
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -44,10 +47,6 @@
             <div class="col-4 bg-dark mr-3">
                 <div class="dashboardColumn mt-3">
                     <h2 class="text-light">PENDING ORDERS</h2>
-                    <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
-                    </form>
                     <div class="mt-5" id="pendingOrders">
                         
                     </div>
@@ -57,11 +56,7 @@
             <div class="col-4 text-dark bg-secondary">
                 <div class="dispatched">
                     <div class="dashboardColumn mt-3">
-                        <h2>DISPATCHED ORDERS</h2>
-                        <form class="form-inline my-2 my-lg-0">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
-                        </form>
+                        <h2 class="text-light">DISPATCHED ORDERS</h2>
                         <div class="mt-5" id="dispatchedOrders">
                             
                         

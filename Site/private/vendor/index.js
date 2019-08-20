@@ -22,7 +22,7 @@ disableFilters();
 let productType = null;
 
 $.get("/vendor/getUsername", user => {
-    $("#username").text("Hi " + user.companyName);
+    $("#username").text("Hi " + user.companyName) + " , Hope You Having A Good Day. Happy Marketing. :)";
 });
 
 gamesButton.click(() => {
@@ -175,6 +175,6 @@ $(document).on("click", ".orderDecline", event => {
             renderOrders();
         }
     });
-})
+});
 
 
