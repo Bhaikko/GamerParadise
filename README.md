@@ -53,7 +53,7 @@ For mysql, To create a database
      style="float: left; margin-right: 10px;"/>
      
 ### User Homepage
-<img src="https://github.com/Bhaikko/GamerParadise/blob/master/Screenshots/UserHomepage.png"
+<img src="https://github.com/Bhaikko/GamerParadise/blob/master/Screenshots/Userhomepage.png"
      style="float: left; margin-right: 10px;"/>
      
 ### User Cart
